@@ -12,6 +12,7 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const connectDB = require('./config/db.js')
 const MongoStore = require('connect-mongo')
+const expressLayouts = require('express-ejs-layouts')
 
 // Load config
 dotenv.config({ path: '.env' })
@@ -21,8 +22,9 @@ require('./config/passport')(passport)
 
 connectDB()
 
-app.set('view-engine', 'ejs')
-app.use(express.urlencoded({ extended: false }))
+app.use(expressLayouts)
+app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -40,9 +42,17 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
   }
 
-app.get('/', (req, res) => {
-    res.send('<h1>Smokey</h1>')
-})
+// Global variables
+app.use(function(req, res, next) {
+    res.locals.success_msg = req.flash('success_msg')
+    res.locals.error_msg = req.flash('error_msg')
+    res.locals.error = req.flash('error')
+    next();
+  });
 
+// Routes
+app.use('/', require('./routes/index.js'))
+app.use('/users', require('./routes/users.js'))
+app.use('/auth', require('./routes/auth.js'))
 
-app.listen(PORT, console.log(`Server is running in ${process.env.NODE_ENV} mode on port ${PORT}`))
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`))
