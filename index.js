@@ -20,7 +20,13 @@ dotenv.config({ path: '.env' })
 // Passport Config
 require('./config/passport')(passport)
 
+// Database connection
 connectDB()
+
+// Logging
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'))
+  }
 
 app.use(expressLayouts)
 app.set('view engine', 'ejs')
@@ -28,19 +34,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
 }))
+
+// Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
-
-// Logging
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'))
-  }
 
 // Global variables
 app.use(function(req, res, next) {
