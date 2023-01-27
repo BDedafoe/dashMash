@@ -18,7 +18,7 @@ const expressLayouts = require('express-ejs-layouts')
 dotenv.config({ path: '.env' })
 
 // Passport Config
-require('./config/passport')(passport)
+require('./config/passport')
 
 // Database connection
 connectDB()
@@ -30,6 +30,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(expressLayouts)
 app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, '/public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(flash())
 app.use(session({
@@ -43,13 +44,14 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
-app.use(express.static(path.join(__dirname, 'public')))
+
 
 // Global variables
 app.use(function(req, res, next) {
     res.locals.success_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')
     res.locals.error = req.flash('error')
+    res.locals.user = req.user || null
     next();
   });
 

@@ -1,7 +1,7 @@
 <div class="row mt-5">
-    <div class="col-md-6 m-auto">
-      <div class="card card-body">
-        <h1 class="text-center mb-3"><i class="fas fa-sign-in-alt"></i>  Login</h1>
+    <div class="col-md-5 m-auto">
+      <div class="card card-body border-warning">
+        <h1 class="text-center text-success mb-3"><i class="fa-solid fa-person-walking-arrow-right"></i> Login</h1>
         <%- include('./partials/messages') %>
         <form action="/users/login" method="POST">
           <div class="form-group">
@@ -24,13 +24,13 @@
               placeholder="Enter Password"
             />
           </div>
-          <button type="submit" class="btn btn-primary btn-block">Login</button>
+          <button type="submit" class="btn btn-outline-info btn-block">Login</button>
         </form>
         <br>
         <div class="divider"></div>
         <div class="section">
-            <a href="/auth/google" class="btn btn-primary btn-block">
-                <i class="fab fa-google left"> Log In With Google</i>
+            <a href="/auth/google" class="btn btn-outline-info btn-block">
+                <i class="fab fa-google left"></i> Log In With Google
             </a>
         </div>
 

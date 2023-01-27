@@ -1,5 +1,19 @@
 
 
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3">Welcome <%= user.name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
+
+<header><%- include('./partials/header.ejs')%></header> 
+    <nav><%- include('./partials/sideNav.ejs')%></nav>
+      <script>
+          M.Sidenav.init(document.querySelector('.sidenav'))
+          M.FormSelect.init(document.querySelector('#status'))
+          CKEDITOR.replace('body', {
+              plugins: 'wysiwygarea, toolbar, basicstyles, link'
+          })
+      </script>
+<iframe
+    title="Sports Odds Widget"
+    style="width: 20rem; height: 25rem; border: 1px solid black;"
+    src="https://widget.the-odds-api.com/v1/sports/basketball_nba/events/?accessKey=wk_adfa64d70e79cea9ea5674245251bf2f&bookmakerKeys=fanduel&oddsFormat=american&markets=h2h%2Cspreads%2Ctotals&marketNames=h2h%3AMoneyline%2Cspreads%3ASpreads%2Ctotals%3AOver%2FUnder">
+</iframe>
+<footer><%- include('./partials/footer.ejs')%></footer>
+

@@ -10,19 +10,6 @@ const { forwardAuthenticated } = require('../middleware/auth');
 // Login Page
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
-// @desc    Auth with Google
-// @route   GET /auth/google
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
-// @desc    Google auth callback
-// @route   GET /auth/google/callback
-router.get(
-    '/google/callback',
-    passport.authenticate('google', { failureRedirect: '/' }),
-    (req, res) => {
-      res.redirect('/dashboard')
-    }
-  )
-
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
@@ -101,6 +88,22 @@ router.post('/login', (req, res, next) => {
     failureFlash: true
   })(req, res, next);
 });
+
+// @desc    Auth with Google
+// @route   GET /auth/google
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
+
+// @desc    Google auth callback
+// @route   GET /auth/google/callback
+router.get(
+  '/google/callback',
+  passport.authenticate('google', { failureRedirect: '/users/login' }),
+  (req, res) => {
+    res.redirect('/dashboard')
+  }
+)
+
+
 
 // Logout
 router.get('/logout', (req, res) => {

@@ -1,3 +1,4 @@
+const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const mongoose = require('mongoose')
@@ -6,8 +7,8 @@ const bcrypt = require('bcryptjs');
 // Load User model
 const User = require('../models/User');
 
-module.exports = function (gPassport) {
-    gPassport.use(
+
+    passport.use(
       new GoogleStrategy({
           clientID: process.env.GOOGLE_CLIENT_ID,
           clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -39,17 +40,17 @@ module.exports = function (gPassport) {
       )
     )
   
-    gPassport.serializeUser((user, done) => {
+    passport.serializeUser((user, done) => {
       done(null, user.id)
     })
   
-    gPassport.deserializeUser((id, done) => {
+    passport.deserializeUser((id, done) => {
       User.findById(id, (err, user) => done(err, user))
     })
-  }
+  
 
-module.exports = function(lPassport) {
-    lPassport.use(
+
+    passport.use(
       new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
         // Match user
         User.findOne({
@@ -72,13 +73,12 @@ module.exports = function(lPassport) {
       })
     );
   
-    lPassport.serializeUser(function(user, done) {
+    passport.serializeUser(function(user, done) {
       done(null, user.id);
     });
   
-    lPassport.deserializeUser(function(id, done) {
+    passport.deserializeUser(function(id, done) {
       User.findById(id, function(err, user) {
         done(err, user);
       });
     });
-  };

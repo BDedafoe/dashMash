@@ -1,8 +1,8 @@
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
-      <div class="card card-body">
-        <h1 class="text-center mb-3">
-          <i class="fas fa-user-plus"></i> Register
+      <div class="card card-body border-warning">
+        <h1 class="text-center text-info mb-3">
+            <i class="fa-solid fa-person-circle-plus"></i> Register
         </h1>
         <%- include('./partials/messages') %>
         <form action="/users/register" method="POST">
@@ -61,7 +61,7 @@
               value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
             />
           </div>
-          <button type="submit" class="btn btn-primary btn-block">
+          <button type="submit" class="btn btn-outline-success btn-block">
             Register
           </button>
         </form>
