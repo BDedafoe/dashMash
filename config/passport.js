@@ -7,6 +7,39 @@ const bcrypt = require('bcryptjs');
 // Load User model
 const User = require('../models/User');
 
+const addGoogleUser =
+  (User) =>
+  ({ id, email, firstName, lastName, profilePhoto }) => {
+    const user = new User({
+      id,
+      email,
+      firstName,
+      lastName,
+      profilePhoto,
+      source: "google",
+    });
+    return user.save();
+  };
+
+const getUsers = (User) => () => {
+  return User.find({});
+};
+
+const getUserByEmail =
+  (User) =>
+  async ({ email }) => {
+    return await User.findOne({
+      email,
+    });
+  };
+
+module.exports = (User) => {
+  return {
+    addGoogleUser: addGoogleUser(User),
+    getUsers: getUsers(User),
+    getUserByEmail: getUserByEmail(User),
+  };
+};
 
     passport.use(
       new GoogleStrategy({
@@ -40,16 +73,6 @@ const User = require('../models/User');
       )
     )
   
-    passport.serializeUser((user, done) => {
-      done(null, user.id)
-    })
-  
-    passport.deserializeUser((id, done) => {
-      User.findById(id, (err, user) => done(err, user))
-    })
-  
-
-
     passport.use(
       new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
         // Match user

@@ -89,21 +89,6 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
-// @desc    Auth with Google
-// @route   GET /auth/google
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
-
-// @desc    Google auth callback
-// @route   GET /auth/google/callback
-router.get(
-  '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/users/login' }),
-  (req, res) => {
-    res.redirect('/dashboard')
-  }
-)
-
-
 
 // Logout
 router.get('/logout', (req, res) => {
@@ -112,5 +97,39 @@ router.get('/logout', (req, res) => {
     res.redirect('/users/login')
   });
 });
+
+const addGoogleUser =
+  (User) =>
+  ({ id, email, firstName, lastName, profilePhoto }) => {
+    const user = new User({
+      id,
+      email,
+      firstName,
+      lastName,
+      profilePhoto,
+      source: "google",
+    });
+    return user.save();
+  };
+
+const getUsers = (User) => () => {
+  return User.find({});
+};
+
+const getUserByEmail =
+  (User) =>
+  async ({ email }) => {
+    return await User.findOne({
+      email,
+    });
+  };
+
+module.exports = (User) => {
+  return {
+    addGoogleUser: addGoogleUser(User),
+    getUsers: getUsers(User),
+    getUserByEmail: getUserByEmail(User),
+  };
+};
 
 module.exports = router;

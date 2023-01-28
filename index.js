@@ -2,8 +2,9 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 4000
 const path = require('path')
+const bodyParser = require("body-parser")
 const dotenv = require('dotenv')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
@@ -13,12 +14,13 @@ const mongoose = require('mongoose')
 const connectDB = require('./config/db.js')
 const MongoStore = require('connect-mongo')
 const expressLayouts = require('express-ejs-layouts')
-
+const cookieParser = require("cookie-parser");
 // Load config
 dotenv.config({ path: '.env' })
 
 // Passport Config
 require('./config/passport')
+
 
 // Database connection
 connectDB()
@@ -30,8 +32,10 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(expressLayouts)
 app.set('view engine', 'ejs')
-app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname + '/public')))
 app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(flash())
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -44,7 +48,6 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
-
 
 // Global variables
 app.use(function(req, res, next) {
