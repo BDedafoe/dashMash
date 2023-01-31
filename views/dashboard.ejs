@@ -1,12 +1,36 @@
 
-<header><%- include('./partials/header.ejs')%></header> 
-    <nav><%- include('./partials/sideNav.ejs')%></nav>
-      
-<iframe
-    title="Sports Odds Widget"
-    class="card card-body border-warning"
-    style="width: 20rem; height: 25rem; border: 1px solid black;"
-    src="https://widget.the-odds-api.com/v1/sports/basketball_nba/events/?accessKey=wk_adfa64d70e79cea9ea5674245251bf2f&bookmakerKeys=fanduel&oddsFormat=american&markets=h2h%2Cspreads%2Ctotals&marketNames=h2h%3AMoneyline%2Cspreads%3ASpreads%2Ctotals%3AOver%2FUnder">
-</iframe>
-<footer><%- include('./partials/footer.ejs')%></footer>
 
+<div class="wrapper">
+    <div class="sidebar">
+         
+<nav class="nav_content">
+
+    <div class="nav_items">
+        
+        <ul class="sidenav" id="mobile-demo">
+            <li class="nav_items"><a href="/dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a></li>
+            <li class="nav_items"><a href="/calendar"><i class="fa-solid fa-calendar-days"></i> Calendar</a></li>
+            <li class="nav_items"><a href="/news"><i class="fa-solid fa-newspaper"></i> News</a></li>
+            <li class="nav_items"><a href="/sports"><i class="fa-solid fa-futbol"></i> Sports</a></li>
+            <li class="nav_items"><a href="/finance"><i class="fa-solid fa-file-invoice-dollar"></i> Finance</a></li>
+            <li class="nav_items"><a href="/food"><i class="fa-solid fa-martini-glass-citrus"></i> Food & Cocktails</a></li>
+            <li class="nav_items"><a href="/users/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+        </ul>
+    </div>
+</nav>
+</div>
+<div class="main_content">
+    <header><%- include('./partials/header.ejs')%></header>
+    <div class="info">
+      <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
+      <div><iframe
+        title="Sports Odds Widget"
+        class="card card-body border-success"
+        style="width: 20rem; height: 25rem; border: 1px solid black;"
+        src="https://widget.the-odds-api.com/v1/sports/basketball_nba/events/?accessKey=wk_adfa64d70e79cea9ea5674245251bf2f&bookmakerKeys=fanduel&oddsFormat=american&markets=h2h%2Cspreads%2Ctotals&marketNames=h2h%3AMoneyline%2Cspreads%3ASpreads%2Ctotals%3AOver%2FUnder">
+    </iframe></div>
+      <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. A sed nobis ut exercitationem atque accusamus sit natus officiis totam blanditiis at eum nemo, nulla et quae eius culpa eveniet voluptatibus repellat illum tenetur, facilis porro. Quae fuga odio perferendis itaque alias sint, beatae non maiores magnam ad, veniam tenetur atque ea exercitationem earum eveniet totam ipsam magni tempora aliquid ullam possimus? Tempora nobis facere porro, praesentium magnam provident accusamus temporibus! Repellendus harum veritatis itaque molestias repudiandae ea corporis maiores non obcaecati libero, unde ipsum consequuntur aut consectetur culpa magni omnis vero odio suscipit vitae dolor quod dignissimos perferendis eos? Consequuntur!</div>
+  </div>
+</div>
+</div>
+<footer><%- include('./partials/footer.ejs')%></footer>

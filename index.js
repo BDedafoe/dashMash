@@ -62,5 +62,6 @@ app.use(function(req, res, next) {
 app.use('/', require('./routes/index.js'))
 app.use('/users', require('./routes/users.js'))
 app.use('/auth', require('./routes/auth.js'))
+app.use('/calendar', require('./routes/calendar.js'))
 
 app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`))
