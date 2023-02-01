@@ -1,13 +1,35 @@
 <navbar><%- include('../partials/sidebar.ejs') %></navbar>
+
 <div class="main_content">
   <div><%- include ('../partials/header.ejs') %></div> 
-
-  <iframe
-        title="Sports Odds Widget"
-        class="card card-body border-success"
-        style="width: 20rem; height: 25rem; border: 1px solid black;"
+  <div class="wrapper">
+  <iframe title="Sports Odds Widget" class="widget"
         src="https://widget.the-odds-api.com/v1/sports/basketball_nba/events/?accessKey=wk_adfa64d70e79cea9ea5674245251bf2f&bookmakerKeys=fanduel&oddsFormat=american&markets=h2h%2Cspreads%2Ctotals&marketNames=h2h%3AMoneyline%2Cspreads%3ASpreads%2Ctotals%3AOver%2FUnder">
   </iframe>
 
-  </div>
-  
+
+
+
+<h3>Search Upcoming Sports</h3>
+<ul class="search-form">
+  <li>    
+      <form id="search-site" action="/" method="POST">
+          <div class="input-group mb-3">
+                  <i class="fas fa-search fa-large" ></i>
+                  <div class="input-field">
+                  <input id="search" type="search" name=" " placeholder="Search by sport">
+                  <label class="label-icon" for="search">
+                  </label>
+               </div>
+              <button type="submit" class="btn btn-outline-success"></button>
+          </div>
+      </form>  
+  </li>   
+</ul>
+
+
+
+
+
+</div>
+</div>

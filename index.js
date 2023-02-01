@@ -15,6 +15,7 @@ const connectDB = require('./config/db.js')
 const MongoStore = require('connect-mongo')
 const expressLayouts = require('express-ejs-layouts')
 const cookieParser = require("cookie-parser");
+const axios = require('axios')
 // Load config
 dotenv.config({ path: '.env' })
 
@@ -30,11 +31,13 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
   }
 
+app.use(express.json())
 app.use(expressLayouts)
 app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname + '/public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(flash())
 app.use(session({

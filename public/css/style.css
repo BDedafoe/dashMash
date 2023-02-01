@@ -156,3 +156,23 @@
 .wrapper .main_content .info div {
   margin-bottom: 20px;
 }
+
+/* Widgets */
+.widget {
+  width: 350px;
+  height: 400px;
+  margin: 25px;
+  padding: 10px;
+  border-color: #f89406;
+  border-radius: 0.25rem;
+  border: 1px solid #f89406 0, 0, 0, 0.6;
+  color: #aaa;
+  position: relative;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #32383e;
+  background-clip: border-box;
+}
